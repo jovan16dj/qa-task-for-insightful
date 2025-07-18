@@ -15,7 +15,6 @@ class RecruitmentPage extends BasePage {
       .parents('.oxd-input-group')
       .find('.oxd-select-text')
       .click();
-
     cy.contains('.oxd-select-option', title).click();
   }
 
@@ -24,8 +23,7 @@ class RecruitmentPage extends BasePage {
       .parents('.oxd-input-group')
       .find('.oxd-select-text')
       .click();
-
-    cy.get('.oxd-select-option').eq(1).click(); // Avoid 0 index ('Select')
+    cy.get('.oxd-select-option').eq(1).click();
   }
 
   selectFirstAvailableHiringManager() {
@@ -33,7 +31,6 @@ class RecruitmentPage extends BasePage {
       .parents('.oxd-input-group')
       .find('.oxd-select-text')
       .click();
-
     cy.get('.oxd-select-option').eq(1).click();
   }
 
@@ -42,12 +39,25 @@ class RecruitmentPage extends BasePage {
       .parents('.oxd-input-group')
       .find('.oxd-select-text')
       .click();
-
     cy.contains('.oxd-select-option', status).click();
   }
 
   clickSearch() {
     cy.get('button[type="submit"]').contains('Search').click();
+  }
+
+  // synchronous find inside a single .then, so no retry on '.oxd-table-card'
+  getAllVacancyRows() {
+    return cy.get('div.oxd-table-body').then($body => {
+      const cards = $body.find('.oxd-table-card');
+      return cy.wrap(cards);
+    });
+  }
+
+  getVacancyCount() {
+    return cy.get('div.oxd-table-body').then($body => {
+      return $body.find('.oxd-table-card').length;
+    });
   }
 
   getVacancyRow(vacancyName) {

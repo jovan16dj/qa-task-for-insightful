@@ -1,4 +1,5 @@
 import RecruitmentPage from '@pages/RecruitmentPage';
+import { assertSearchResults } from '@support/utils';
 
 describe('Recruitment - Vacancies Search Tests', () => {
   beforeEach(() => {
@@ -10,54 +11,26 @@ describe('Recruitment - Vacancies Search Tests', () => {
   it('should search by Job Title only', () => {
     RecruitmentPage.typeJobTitle('Software Engineer');
     RecruitmentPage.clickSearch();
-
-    cy.get('div.oxd-table-body').then(($body) => {
-      if ($body.find('.oxd-table-card').length > 0) {
-        cy.contains('.oxd-table-card', 'Software Engineer').should('exist');
-      } else {
-        RecruitmentPage.getNoRecordsMessage().should('be.visible');
-      }
-    });
+    assertSearchResults('Software Engineer');
   });
 
   it('should search by dynamic Vacancy', () => {
     RecruitmentPage.selectFirstAvailableVacancy();
     RecruitmentPage.clickSearch();
-
-    cy.get('div.oxd-table-body').then(($body) => {
-      if ($body.find('.oxd-table-card').length > 0) {
-        cy.get('.oxd-table-card').should('exist');
-      } else {
-        RecruitmentPage.getNoRecordsMessage().should('be.visible');
-      }
-    });
+    assertSearchResults();
   });
 
   it('should search by dynamic Vacancy + dynamic Hiring Manager', () => {
     RecruitmentPage.selectFirstAvailableVacancy();
     RecruitmentPage.selectFirstAvailableHiringManager();
     RecruitmentPage.clickSearch();
-
-    cy.get('div.oxd-table-body').then(($body) => {
-      if ($body.find('.oxd-table-card').length > 0) {
-        cy.get('.oxd-table-card').should('exist');
-      } else {
-        RecruitmentPage.getNoRecordsMessage().should('be.visible');
-      }
-    });
+    assertSearchResults();
   });
 
   it('should search by Status only', () => {
     RecruitmentPage.selectStatus('Active');
     RecruitmentPage.clickSearch();
-
-    cy.get('div.oxd-table-body').then(($body) => {
-      if ($body.find('.oxd-table-card').length > 0) {
-        cy.get('.oxd-table-card').should('exist');
-      } else {
-        RecruitmentPage.getNoRecordsMessage().should('be.visible');
-      }
-    });
+    assertSearchResults();
   });
 
   it('should search by all filters combined', () => {
@@ -66,13 +39,6 @@ describe('Recruitment - Vacancies Search Tests', () => {
     RecruitmentPage.selectFirstAvailableHiringManager();
     RecruitmentPage.selectStatus('Active');
     RecruitmentPage.clickSearch();
-
-    cy.get('div.oxd-table-body').then(($body) => {
-      if ($body.find('.oxd-table-card').length > 0) {
-        cy.get('.oxd-table-card').should('exist');
-      } else {
-        RecruitmentPage.getNoRecordsMessage().should('be.visible');
-      }
-    });
+    assertSearchResults('Software Engineer');
   });
 });
