@@ -1,6 +1,6 @@
 import MyInfoPage from '@pages/MyInfoPage';
 
-describe('My Info - Attachments Tests (intercept + UI download/delete, wildcard intercept)', () => {
+describe('My Info - Attachments Tests (intercept + ui download/delete)', () => {
   const fileName = 'sample.pdf';
   const description = 'Test file upload description';
 
@@ -30,16 +30,16 @@ describe('My Info - Attachments Tests (intercept + UI download/delete, wildcard 
 
     cy.wait('@getAttachments');
 
-    // Assert section present
+    // assert section present
     MyInfoPage.getAttachmentsSection().should('be.visible');
 
-    // Assert attachment row visible
+    // assert attachment row visible
     MyInfoPage.getAttachmentRow(fileName).should('exist');
 
-    // Download (visual check only)
+    // download (visual check only)
     MyInfoPage.downloadAttachment(fileName);
 
-    // Delete flow
+    // delete flow
     MyInfoPage.deleteAttachment(fileName);
     MyInfoPage.confirmDelete();
 
