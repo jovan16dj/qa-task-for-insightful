@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "cypress",
+    "paths": {
+      "@pages/*": ["pages/*"],
+      "@routes": ["support/routes.js"],
+      "@support/*": ["support/*"],
+      "@fixtures/*": ["fixtures/*"],
+      "@basepages/*": ["pages/base/*"]
+    }
+  },
+  "include": ["cypress"]
+}
