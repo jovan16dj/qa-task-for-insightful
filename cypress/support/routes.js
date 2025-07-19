@@ -7,5 +7,5 @@ export const routes = {
   myInfoAttachments: '/web/index.php/pim/viewPersonalDetails/attachments',
   recruitment: '/web/index.php/recruitment/viewRecruitmentModule',
   vacancies: '/web/index.php/recruitment/viewJobVacancy',
-  pim: '/web/index.php/pim/viewPimModule' 
+  pim: '/web/index.php/pim/viewEmployeeList' 
 };

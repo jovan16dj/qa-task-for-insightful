@@ -30,19 +30,13 @@ describe('My Info - Attachments Tests (intercept + ui download/delete)', () => {
 
     cy.wait('@getAttachments');
 
-    // assert section present
     MyInfoPage.getAttachmentsSection().should('be.visible');
-
-    // assert attachment row visible
     MyInfoPage.getAttachmentRow(fileName).should('exist');
 
-    // download (visual check only)
     MyInfoPage.downloadAttachment(fileName);
-
-    // delete flow
     MyInfoPage.deleteAttachment(fileName);
     MyInfoPage.confirmDelete();
 
-    cy.contains('No Records Found').should('be.visible');
+    cy.getNoRecordsMessage().should('be.visible');
   });
 });
